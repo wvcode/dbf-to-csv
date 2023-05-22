@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>DBF to CSV</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
+<body>
+  <div class="section">
+    <div class="content">
+      <div class="title is-1">DBF to CSV</div>
+      <div class="subtitle is-2">Transforme um arquivo DBF em CSV.</div>
+      <form method="post" action="/converter" enctype="multipart/form-data">
+        <div class="file has-name" id="file-dbf">
+          <label class="file-label">
+            <input class="file-input" type="file" name="arquivo">
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Selecione um Arquivo…
+              </span>
+              <span class="file-name">
+                Nenhum arquivo selecionado…
+              </span>
+            </span>
+          </label>
+        </div><br><br><input class="button" type="submit" value="Enviar">
+      </form>
+
+      <div id="resposta" class="">
+        <br><br>
+        {% if arquivo %}
+        <a href="{{arquivo}}">Arquivo pronto para baixar!</a>
+        {% else %}
+        <p>Esperando um arquivo a ser convertido.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.querySelector('#file-dbf input[type=file]');
+    fileInput.onchange = () => {
+      if (fileInput.files.length > 0) {
+        const fileName = document.querySelector('#file-dbf .file-name');
+        fileName.textContent = fileInput.files[0].name;
+      }
+    }
+
+  </script>
+</body>
+
+</html>
